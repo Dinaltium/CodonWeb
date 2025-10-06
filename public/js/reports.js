@@ -4,7 +4,7 @@ function loadReportsPage() {
         refreshReports();
         return;
     }
-    
+
     page.innerHTML = `
         <style>
             .reports-container {
@@ -93,22 +93,21 @@ function loadReportsPage() {
             </div>
         </div>
     `;
-    
+
     refreshReports();
 }
 
 async function refreshReports() {
     const container = document.getElementById('reportsTableContainer');
-    
+
     try {
-        const response = await fetch('/api/reports');
-        const reports = await response.json();
-        
+        const reports = await db.getReports();
+
         if (reports.length === 0) {
             container.innerHTML = '<div class="no-reports">No reports available. Run a sequence analysis to generate reports.</div>';
             return;
         }
-        
+
         let html = `
             <table class="reports-table">
                 <thead>
@@ -124,7 +123,7 @@ async function refreshReports() {
                 </thead>
                 <tbody>
         `;
-        
+
         for (let report of reports) {
             const date = new Date(report.createdAt).toLocaleString();
             html += `
@@ -139,12 +138,12 @@ async function refreshReports() {
                 </tr>
             `;
         }
-        
+
         html += `
                 </tbody>
             </table>
         `;
-        
+
         container.innerHTML = html;
     } catch (error) {
         container.innerHTML = '<div class="no-reports">Error loading reports.</div>';

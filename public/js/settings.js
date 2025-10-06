@@ -6,7 +6,7 @@ function loadSettingsPage() {
         }
         return;
     }
-    
+
     page.innerHTML = `
         <style>
             .settings-container {
@@ -291,7 +291,7 @@ function loadSettingsPage() {
             </div>
         </div>
     `;
-    
+
     loadAccounts();
 }
 
@@ -300,12 +300,12 @@ function switchSettingsTab(tabName) {
         tab.classList.remove('active');
     });
     document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
-    
+
     document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
     });
     document.getElementById(`${tabName}Tab`).classList.add('active');
-    
+
     if (tabName === 'accounts') {
         loadAccounts();
     }
@@ -314,16 +314,15 @@ function switchSettingsTab(tabName) {
 async function loadAccounts() {
     const container = document.getElementById('accountsList');
     if (!container) return;
-    
+
     try {
-        const response = await fetch('/api/accounts');
-        const accounts = await response.json();
-        
+        const accounts = await db.getAccounts();
+
         if (accounts.length === 0) {
             container.innerHTML = '<div class="no-accounts">No accounts found. Create your first account above.</div>';
             return;
         }
-        
+
         let html = '';
         for (let account of accounts) {
             html += `
@@ -340,7 +339,7 @@ async function loadAccounts() {
                 </div>
             `;
         }
-        
+
         container.innerHTML = html;
     } catch (error) {
         container.innerHTML = '<div class="no-accounts">Error loading accounts.</div>';
@@ -352,28 +351,24 @@ async function createAccount() {
     const email = document.getElementById('accountEmail').value;
     const type = document.getElementById('accountType').value;
     const description = document.getElementById('accountDesc').value;
-    
+
     if (!name || !email) {
         alert('Please fill in account name and email.');
         return;
     }
-    
+
     try {
-        const response = await fetch('/api/accounts', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, type, description })
-        });
-        
-        if (response.ok) {
+        const result = await db.addAccount({ name, email, type, description });
+
+        if (result) {
             document.getElementById('accountName').value = '';
             document.getElementById('accountEmail').value = '';
             document.getElementById('accountDesc').value = '';
-            
+
             const successMsg = document.getElementById('successMessage');
             successMsg.innerHTML = '<div class="success-message">Account created successfully!</div>';
             setTimeout(() => { successMsg.innerHTML = ''; }, 3000);
-            
+
             loadAccounts();
             loadDashboardData();
         }
@@ -386,13 +381,11 @@ async function deleteAccount(id) {
     if (!confirm('Are you sure you want to delete this account?')) {
         return;
     }
-    
+
     try {
-        const response = await fetch(`/api/accounts/${id}`, {
-            method: 'DELETE'
-        });
-        
-        if (response.ok) {
+        const result = await db.deleteAccount(id);
+
+        if (result) {
             loadAccounts();
             loadDashboardData();
         }

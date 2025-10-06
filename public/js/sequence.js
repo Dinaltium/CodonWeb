@@ -30,7 +30,7 @@ const AA_NAMES = {
 function initSequencePage() {
     const page = document.getElementById('sequencePage');
     if (page.innerHTML) return;
-    
+
     page.innerHTML = `
         <style>
             .sequence-container {
@@ -349,31 +349,31 @@ function initSequencePage() {
 
 function validateSeq(sequence) {
     const cleanSeq = sequence.toUpperCase().replace(/\s/g, '');
-    
+
     if (cleanSeq.length === 0) {
         return { valid: false, error: 'Please enter a DNA sequence.' };
     }
-    
+
     if (!/^[ATCG]+$/.test(cleanSeq)) {
         return { valid: false, error: 'Invalid characters detected. Only A, T, C, and G are allowed.' };
     }
-    
+
     if (cleanSeq.length < 3) {
         return { valid: false, error: 'Sequence is too short. Minimum length is 3 nucleotides.' };
     }
-    
+
     return { valid: true, sequence: cleanSeq };
 }
 
 function analyzeSeq() {
     const sequenceInput = document.getElementById('seqInput').value;
     const validation = validateSeq(sequenceInput);
-    
+
     document.getElementById('seqResults').classList.remove('active');
-    
+
     const existingError = document.querySelector('.error-message');
     if (existingError) existingError.remove();
-    
+
     if (!validation.valid) {
         const errorDiv = document.createElement('div');
         errorDiv.className = 'error-message';
@@ -381,9 +381,9 @@ function analyzeSeq() {
         document.querySelector('.seq-card').appendChild(errorDiv);
         return;
     }
-    
+
     document.getElementById('seqLoading').classList.add('active');
-    
+
     setTimeout(() => {
         performSeqAnalysis(validation.sequence);
         document.getElementById('seqLoading').classList.remove('active');
@@ -396,7 +396,7 @@ function performSeqAnalysis(sequence) {
     for (let codon in CODON_TABLE) {
         codonCounts[codon] = 0;
     }
-    
+
     let totalCodons = 0;
     for (let i = 0; i <= sequence.length - 3; i += 3) {
         const codon = sequence.substr(i, 3);
@@ -405,13 +405,13 @@ function performSeqAnalysis(sequence) {
             totalCodons++;
         }
     }
-    
+
     const gcCount = (sequence.match(/[GC]/g) || []).length;
     const gcContent = ((gcCount / sequence.length) * 100).toFixed(2);
-    
+
     const atCount = (sequence.match(/[AT]/g) || []).length;
     const atContent = ((atCount / sequence.length) * 100).toFixed(2);
-    
+
     displaySeqStats(sequence.length, totalCodons, gcContent, atContent, sequence);
     displaySeqCodonFrequency(codonCounts);
     displaySeqAminoAcids(codonCounts);
@@ -438,24 +438,21 @@ async function displaySeqStats(length, totalCodons, gcContent, atContent, sequen
             <div class="stat-label">AT Content</div>
         </div>
     `;
-    
-    await fetch('/api/reports', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            sequenceLength: length,
-            totalCodons,
-            gcContent,
-            atContent,
-            sequence
-        })
+
+    await db.addReport({
+        sequenceLength: length,
+        totalCodons,
+        gcContent,
+        atContent,
+        sequence,
+        createdBy: 'Admin'
     });
 }
 
 function displaySeqCodonFrequency(codonCounts) {
     const container = document.getElementById('seqCodonFreq');
     let html = '<div class="codon-grid">';
-    
+
     for (let codon in CODON_TABLE) {
         const count = codonCounts[codon];
         const aa = CODON_TABLE[codon];
@@ -467,14 +464,14 @@ function displaySeqCodonFrequency(codonCounts) {
             </div>
         `;
     }
-    
+
     html += '</div>';
     container.innerHTML = html;
 }
 
 function displaySeqAminoAcids(codonCounts) {
     const aaGroups = {};
-    
+
     for (let codon in CODON_TABLE) {
         const aa = CODON_TABLE[codon];
         if (!aaGroups[aa]) {
@@ -482,23 +479,23 @@ function displaySeqAminoAcids(codonCounts) {
         }
         aaGroups[aa].push({ codon, count: codonCounts[codon] });
     }
-    
+
     const container = document.getElementById('seqAminoAcids');
     let html = '<div class="aa-section">';
-    
+
     const sortedAAs = Object.keys(aaGroups).sort();
-    
+
     for (let aa of sortedAAs) {
         const codons = aaGroups[aa];
         const totalCount = codons.reduce((sum, c) => sum + c.count, 0);
         const fullName = AA_NAMES[aa] || aa;
-        
+
         html += `
             <div class="aa-group">
                 <div class="aa-header">${aa} - ${fullName} (Total: ${totalCount})</div>
                 <div class="aa-codons">
         `;
-        
+
         for (let codonData of codons) {
             html += `
                 <div class="aa-codon-item">
@@ -506,13 +503,13 @@ function displaySeqAminoAcids(codonCounts) {
                 </div>
             `;
         }
-        
+
         html += `
                 </div>
             </div>
         `;
     }
-    
+
     html += '</div>';
     container.innerHTML = html;
 }
@@ -523,20 +520,20 @@ function displaySeqTopCodons(codonCounts, totalCodons) {
         .filter(item => item.count > 0)
         .sort((a, b) => b.count - a.count)
         .slice(0, 20);
-    
+
     const maxCount = codonArray.length > 0 ? codonArray[0].count : 1;
     const container = document.getElementById('seqTopCodons');
-    
+
     if (codonArray.length === 0) {
         container.innerHTML = '<p>No codons found in sequence.</p>';
         return;
     }
-    
+
     let html = '';
     for (let item of codonArray) {
         const percentage = ((item.count / totalCodons) * 100).toFixed(1);
         const barWidth = (item.count / maxCount) * 100;
-        
+
         html += `
             <div class="bar-row">
                 <div class="bar-label">${item.codon} (${item.aa})</div>
@@ -548,7 +545,7 @@ function displaySeqTopCodons(codonCounts, totalCodons) {
             </div>
         `;
     }
-    
+
     container.innerHTML = html;
 }
 

@@ -1,44 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Bioinformatics Platform</title>
+    <title>Login - CodonCraft</title>
     <link rel="stylesheet" href="/css/login.css">
 </head>
+
 <body>
     <div class="login-container">
         <div class="login-card">
-            <div class="logo">
-                <div class="logo-icon">🧬</div>
-                <h1>Bioinformatics Platform</h1>
+            <div class="login-header">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M9 12l2 2 4-4"></path>
+                            <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"></path>
+                        </svg>
+                    </div>
+                    <span class="logo-text">CodonCraft</span>
+                </div>
+                <h1>Welcome Back</h1>
+                <p>Sign in to your bioinformatics workspace</p>
             </div>
-            
-            <form id="loginForm">
+
+            <form class="login-form" id="loginForm">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required autofocus>
+                    <input type="text" id="username" name="username" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" required>
                 </div>
-                
-                <div id="errorMessage" class="error-message"></div>
-                
-                <button type="submit" class="login-btn">
+
+                <div class="form-options">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="rememberMe">
+                        <span class="checkmark"></span>
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="login-btn" id="loginBtn">
                     <span class="btn-text">Sign In</span>
-                    <span class="btn-loader" style="display: none;">...</span>
+                    <span class="btn-loader" style="display: none;">Signing in...</span>
                 </button>
+
+                <div class="error-message" id="errorMessage" style="display: none;"></div>
             </form>
-            
-            <div class="login-info">
-                <p>Default credentials: <strong>admin / admin123</strong></p>
+
+            <div class="login-footer">
+                <p>Don't have an account? <a href="#" id="registerLink">Create one</a></p>
+            </div>
+        </div>
+
+        <!-- Registration Modal -->
+        <div class="modal" id="registerModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Create Account</h2>
+                    <button class="close" id="closeRegister">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <form class="register-form" id="registerForm">
+                    <div class="form-group">
+                        <label for="regUsername">Username</label>
+                        <input type="text" id="regUsername" name="username" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regEmail">Email</label>
+                        <input type="email" id="regEmail" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regPassword">Password</label>
+                        <input type="password" id="regPassword" name="password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regConfirmPassword">Confirm Password</label>
+                        <input type="password" id="regConfirmPassword" name="confirmPassword" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regRole">Role</label>
+                        <select id="regRole" name="role">
+                            <option value="User">User</option>
+                            <option value="Researcher">Researcher</option>
+                            <option value="Administrator">Administrator</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="register-btn" id="registerBtn">
+                        <span class="btn-text">Create Account</span>
+                        <span class="btn-loader" style="display: none;">Creating...</span>
+                    </button>
+
+                    <div class="error-message" id="registerErrorMessage" style="display: none;"></div>
+                </form>
             </div>
         </div>
     </div>
-    
-    <script src="/js/login.js"></script>
+
+    <script src="/js/auth.js"></script>
 </body>
+
 </html>

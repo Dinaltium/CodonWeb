@@ -1,44 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Bioinformatics Platform</title>
     <link rel="stylesheet" href="/css/dashboard.css">
 </head>
+
 <body>
     <div class="app-container">
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <span class="logo-icon">🧬</span>
+                    <div class="logo-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M9 12l2 2 4-4"></path>
+                            <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"></path>
+                        </svg>
+                    </div>
                     <span class="logo-text">BioInfo</span>
                 </div>
-                <button class="toggle-btn" id="toggleBtn">☰</button>
+                <button class="toggle-btn" id="toggleBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
             </div>
-            
+
             <nav class="sidebar-nav">
                 <a href="#" class="nav-item active" data-page="dashboard">
-                    <span class="nav-icon">📊</span>
+                    <div class="nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                    </div>
                     <span class="nav-text">Dashboard</span>
                 </a>
                 <a href="#" class="nav-item" data-page="sequence">
-                    <span class="nav-icon">🔬</span>
+                    <div class="nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M9 12l2 2 4-4"></path>
+                            <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"></path>
+                        </svg>
+                    </div>
                     <span class="nav-text">Sequence Analysis</span>
                 </a>
                 <a href="#" class="nav-item" data-page="reports">
-                    <span class="nav-icon">📄</span>
+                    <div class="nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14,2 14,8 20,8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10,9 9,9 8,9"></polyline>
+                        </svg>
+                    </div>
                     <span class="nav-text">Reports</span>
                 </a>
                 <a href="#" class="nav-item" data-page="settings">
-                    <span class="nav-icon">⚙️</span>
+                    <div class="nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path
+                                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                            </path>
+                        </svg>
+                    </div>
                     <span class="nav-text">Settings</span>
                 </a>
             </nav>
-            
+
             <div class="sidebar-footer">
                 <div class="notification-bar">
-                    <span class="notif-icon">🔔</span>
+                    <div class="notif-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                    </div>
                     <span class="notif-text">3 new notifications</span>
                 </div>
                 <div class="user-profile" id="userProfile">
@@ -47,80 +98,446 @@
                         <div class="user-name">Admin</div>
                         <div class="user-role">Administrator</div>
                     </div>
-                    <button class="logout-btn" id="logoutBtn" title="Logout">⏻</button>
+                    <button class="user-menu-btn" id="userMenuBtn" title="User Menu">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </aside>
-        
+
         <main class="main-content">
             <div id="dashboardPage" class="page active">
                 <div class="page-header">
                     <h1>Dashboard</h1>
                     <p class="subtitle">Welcome to your bioinformatics workspace</p>
                 </div>
-                
+
                 <div class="dashboard-grid">
                     <div class="dashboard-card">
-                        <div class="card-icon">🧬</div>
+                        <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M9 12l2 2 4-4"></path>
+                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"></path>
+                            </svg>
+                        </div>
                         <div class="card-content">
                             <h3>Total Analyses</h3>
                             <div class="card-value" id="totalAnalyses">0</div>
+                            <div class="card-subtitle">DNA sequences analyzed</div>
                         </div>
                     </div>
-                    
+
                     <div class="dashboard-card">
-                        <div class="card-icon">📊</div>
+                        <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                        </div>
                         <div class="card-content">
-                            <h3>Recent Reports</h3>
-                            <div class="card-value" id="recentReports">0</div>
+                            <h3>Codons Processed</h3>
+                            <div class="card-value" id="totalCodons">0</div>
+                            <div class="card-subtitle">Total codons analyzed</div>
                         </div>
                     </div>
-                    
+
                     <div class="dashboard-card">
-                        <div class="card-icon">👥</div>
+                        <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M9 12l2 2 4-4"></path>
+                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"></path>
+                            </svg>
+                        </div>
                         <div class="card-content">
-                            <h3>Accounts</h3>
-                            <div class="card-value" id="totalAccounts">0</div>
+                            <h3>GC Content</h3>
+                            <div class="card-value" id="avgGcContent">0%</div>
+                            <div class="card-subtitle">Average GC content</div>
                         </div>
                     </div>
-                    
+
                     <div class="dashboard-card">
-                        <div class="card-icon">⚡</div>
+                        <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polygon points="13,2 3,14 12,14 11,22 21,10 12,10"></polygon>
+                            </svg>
+                        </div>
                         <div class="card-content">
                             <h3>System Status</h3>
-                            <div class="card-value status-active">Active</div>
+                            <div class="card-value status-active">Online</div>
+                            <div class="card-subtitle">Analysis engine ready</div>
                         </div>
                     </div>
                 </div>
-                
+
+                <div class="dashboard-section">
+                    <h2>Recent Analyses</h2>
+                    <div class="recent-analyses" id="recentAnalyses">
+                        <div class="no-data">No recent analyses found. Start by analyzing a DNA sequence!</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-section">
+                    <h2>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" style="display: inline-block; margin-right: 8px; vertical-align: middle;">
+                            <path d="M9 12l2 2 4-4"></path>
+                            <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"></path>
+                        </svg>
+                        Codon Usage Analysis
+                    </h2>
+                    <div class="codon-overview">
+                        <div class="codon-chart-container">
+                            <canvas id="codonChart" width="400" height="200"></canvas>
+                        </div>
+                        <div class="codon-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Most Common Codon:</span>
+                                <span class="stat-value" id="mostCommonCodon">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Codon Diversity:</span>
+                                <span class="stat-value" id="codonDiversity">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Stop Codons:</span>
+                                <span class="stat-value" id="stopCodons">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Codon Bias Index:</span>
+                                <span class="stat-value" id="codonBiasIndex">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-section">
+                    <h2>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" style="display: inline-block; margin-right: 8px; vertical-align: middle;">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        Amino Acid Composition
+                    </h2>
+                    <div class="amino-acid-overview">
+                        <div class="aa-chart-container">
+                            <canvas id="aminoAcidChart" width="500" height="300"></canvas>
+                        </div>
+                        <div class="aa-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Most Abundant AA:</span>
+                                <span class="stat-value" id="mostAbundantAA">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">AA Diversity:</span>
+                                <span class="stat-value" id="aaDiversity">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Hydrophobic AAs:</span>
+                                <span class="stat-value" id="hydrophobicAAs">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Charged AAs:</span>
+                                <span class="stat-value" id="chargedAAs">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-section">
+                    <h2>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" style="display: inline-block; margin-right: 8px; vertical-align: middle;">
+                            <polygon points="13,2 3,14 12,14 11,22 21,10 12,10"></polygon>
+                        </svg>
+                        Codon Optimization Insights
+                    </h2>
+                    <div class="optimization-insights">
+                        <div class="insight-card">
+                            <h3>Efficiency Score</h3>
+                            <div class="score-display">
+                                <div class="score-circle" id="efficiencyScore">
+                                    <span class="score-value">-</span>
+                                    <span class="score-label">/100</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="insight-card">
+                            <h3>Optimization Recommendations</h3>
+                            <div class="recommendations" id="optimizationRecommendations">
+                                <p class="no-data">No data available for recommendations</p>
+                            </div>
+                        </div>
+                        <div class="insight-card">
+                            <h3>Codon Usage Patterns</h3>
+                            <div class="pattern-analysis" id="patternAnalysis">
+                                <div class="pattern-item">
+                                    <span class="pattern-label">Rare Codons:</span>
+                                    <span class="pattern-value" id="rareCodons">-</span>
+                                </div>
+                                <div class="pattern-item">
+                                    <span class="pattern-label">Preferred Codons:</span>
+                                    <span class="pattern-value" id="preferredCodons">-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-section">
+                    <h2>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" style="display: inline-block; margin-right: 8px; vertical-align: middle;">
+                            <path d="M3 3v18h18"></path>
+                            <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path>
+                        </svg>
+                        Codon Usage Heatmap
+                    </h2>
+                    <div class="heatmap-container">
+                        <div class="heatmap-legend">
+                            <span class="legend-label">Low Usage</span>
+                            <div class="legend-gradient"></div>
+                            <span class="legend-label">High Usage</span>
+                        </div>
+                        <div class="codon-heatmap" id="codonHeatmap">
+                            <!-- Heatmap will be generated here -->
+                        </div>
+                    </div>
+                </div>
+
                 <div class="quick-actions">
                     <h2>Quick Actions</h2>
                     <div class="action-buttons">
-                        <button class="action-btn" onclick="navigateToPage('sequence')">
-                            <span>🔬</span>
+                        <button class="action-btn primary" onclick="navigateToPage('sequence')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M9 12l2 2 4-4"></path>
+                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"></path>
+                            </svg>
                             New Analysis
                         </button>
                         <button class="action-btn" onclick="navigateToPage('reports')">
-                            <span>📄</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14,2 14,8 20,8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10,9 9,9 8,9"></polyline>
+                            </svg>
                             View Reports
                         </button>
+                        <button class="action-btn" onclick="openCodonTools()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M9 12l2 2 4-4"></path>
+                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"></path>
+                            </svg>
+                            Codon Tools
+                        </button>
+                        <button class="action-btn" onclick="exportData()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7,10 12,15 17,10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Export Data
+                        </button>
                         <button class="action-btn" onclick="navigateToPage('settings')">
-                            <span>👥</span>
-                            Manage Accounts
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path
+                                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                </path>
+                            </svg>
+                            Settings
                         </button>
                     </div>
                 </div>
+
+                <!-- Codon Tools Modal -->
+                <div id="codonToolsModal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Codon Analysis Tools</h3>
+                            <span class="close" onclick="closeCodonTools()">&times;</span>
+                        </div>
+                        <div class="modal-body">
+                            <div class="tool-grid">
+                                <button class="tool-btn" onclick="reverseComplement()">
+                                    <svg class="tool-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <polyline points="23,4 23,10 17,10"></polyline>
+                                        <polyline points="1,20 1,14 7,14"></polyline>
+                                        <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15">
+                                        </path>
+                                    </svg>
+                                    <span class="tool-name">Reverse Complement</span>
+                                    <span class="tool-desc">Get reverse complement of DNA sequence</span>
+                                </button>
+                                <button class="tool-btn" onclick="codonOptimizer()">
+                                    <svg class="tool-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <polygon points="13,2 3,14 12,14 11,22 21,10 12,10"></polygon>
+                                    </svg>
+                                    <span class="tool-name">Codon Optimizer</span>
+                                    <span class="tool-desc">Optimize codons for expression</span>
+                                </button>
+                                <button class="tool-btn" onclick="gcCalculator()">
+                                    <svg class="tool-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="3" width="7" height="7"></rect>
+                                        <rect x="14" y="3" width="7" height="7"></rect>
+                                        <rect x="14" y="14" width="7" height="7"></rect>
+                                        <rect x="3" y="14" width="7" height="7"></rect>
+                                    </svg>
+                                    <span class="tool-name">GC Calculator</span>
+                                    <span class="tool-desc">Calculate GC content and skew</span>
+                                </button>
+                                <button class="tool-btn" onclick="orfFinder()">
+                                    <svg class="tool-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <circle cx="12" cy="12" r="6"></circle>
+                                        <circle cx="12" cy="12" r="2"></circle>
+                                    </svg>
+                                    <span class="tool-name">ORF Finder</span>
+                                    <span class="tool-desc">Find open reading frames</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
+
             <div id="sequencePage" class="page"></div>
             <div id="reportsPage" class="page"></div>
             <div id="settingsPage" class="page"></div>
         </main>
+
+        <!-- User Profile Modal -->
+        <div id="userProfileModal" class="user-modal">
+            <div class="user-modal-content">
+                <div class="user-modal-header">
+                    <div class="user-modal-avatar">
+                        <div class="avatar-initial">A</div>
+                    </div>
+                    <div class="user-modal-info">
+                        <div class="user-modal-name">Admin</div>
+                        <div class="user-modal-email">admin@codoncraft.com</div>
+                    </div>
+                    <button class="user-modal-close" id="userModalClose">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="user-modal-body">
+                    <div class="user-menu-item" onclick="editAccount()">
+                        <div class="menu-item-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-title">Account Settings</div>
+                            <div class="menu-item-desc">Manage your profile and preferences</div>
+                        </div>
+                        <div class="menu-item-arrow">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="9,18 15,12 9,6"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="user-menu-item" onclick="openLanguageSettings()">
+                        <div class="menu-item-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                <path
+                                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-title">Language & Region</div>
+                            <div class="menu-item-desc">English (US)</div>
+                        </div>
+                        <div class="menu-item-arrow">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="9,18 15,12 9,6"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="user-menu-item" onclick="openNotifications()">
+                        <div class="menu-item-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            </svg>
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-title">Notifications</div>
+                            <div class="menu-item-desc">Manage notification preferences</div>
+                        </div>
+                        <div class="menu-item-arrow">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="9,18 15,12 9,6"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="user-menu-divider"></div>
+
+                    <div class="user-menu-item logout-item" onclick="logout()">
+                        <div class="menu-item-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16,17 21,12 16,7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                        </div>
+                        <div class="menu-item-content">
+                            <div class="menu-item-title">Sign Out</div>
+                            <div class="menu-item-desc">Logout from your account</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    
+
+    <script src="/js/database.js"></script>
     <script src="/js/dashboard.js"></script>
     <script src="/js/sequence.js"></script>
     <script src="/js/reports.js"></script>
     <script src="/js/settings.js"></script>
 </body>
+
 </html>

@@ -301,7 +301,13 @@ function initSequencePage() {
         
         <div class="sequence-container">
             <div class="page-header">
-                <h1>🔬 Sequence Analysis</h1>
+                <h1>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; margin-right: 8px; vertical-align: middle;">
+                        <path d="M9 12l2 2 4-4"></path>
+                        <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"></path>
+                    </svg>
+                    Sequence Analysis
+                </h1>
                 <p class="subtitle">Analyze DNA sequences for codon usage and GC content</p>
             </div>
             
@@ -322,22 +328,48 @@ function initSequencePage() {
             
             <div class="results" id="seqResults">
                 <div class="seq-card">
-                    <h2>📊 Summary Statistics</h2>
+                    <h2>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; margin-right: 6px; vertical-align: middle;">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        Summary Statistics
+                    </h2>
                     <div class="stats-grid" id="seqStatsGrid"></div>
                 </div>
                 
                 <div class="seq-card">
-                    <h2>🧮 Codon Frequency Analysis</h2>
+                    <h2>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; margin-right: 6px; vertical-align: middle;">
+                            <path d="M3 3v18h18"></path>
+                            <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path>
+                        </svg>
+                        Codon Frequency Analysis
+                    </h2>
                     <div id="seqCodonFreq"></div>
                 </div>
                 
                 <div class="seq-card">
-                    <h2>🔬 Amino Acid Translation</h2>
+                    <h2>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; margin-right: 6px; vertical-align: middle;">
+                            <path d="M9 12l2 2 4-4"></path>
+                            <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"></path>
+                        </svg>
+                        Amino Acid Translation
+                    </h2>
                     <div id="seqAminoAcids"></div>
                 </div>
                 
                 <div class="seq-card">
-                    <h2>📈 Top 20 Most Frequent Codons</h2>
+                    <h2>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; margin-right: 6px; vertical-align: middle;">
+                            <path d="M3 3v18h18"></path>
+                            <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path>
+                        </svg>
+                        Top 20 Most Frequent Codons
+                    </h2>
                     <div class="chart-container">
                         <div class="bar-chart" id="seqTopCodons"></div>
                     </div>
@@ -365,7 +397,7 @@ function validateSeq(sequence) {
     return { valid: true, sequence: cleanSeq };
 }
 
-function analyzeSeq() {
+function analyzeSeq(createReport = true) {
     const sequenceInput = document.getElementById('seqInput').value;
     const validation = validateSeq(sequenceInput);
 
@@ -385,13 +417,13 @@ function analyzeSeq() {
     document.getElementById('seqLoading').classList.add('active');
 
     setTimeout(() => {
-        performSeqAnalysis(validation.sequence);
+        performSeqAnalysis(validation.sequence, createReport);
         document.getElementById('seqLoading').classList.remove('active');
         document.getElementById('seqResults').classList.add('active');
     }, 800);
 }
 
-function performSeqAnalysis(sequence) {
+function performSeqAnalysis(sequence, createReport = true) {
     const codonCounts = {};
     for (let codon in CODON_TABLE) {
         codonCounts[codon] = 0;
@@ -412,13 +444,13 @@ function performSeqAnalysis(sequence) {
     const atCount = (sequence.match(/[AT]/g) || []).length;
     const atContent = ((atCount / sequence.length) * 100).toFixed(2);
 
-    displaySeqStats(sequence.length, totalCodons, gcContent, atContent, sequence);
+    displaySeqStats(sequence.length, totalCodons, gcContent, atContent, sequence, createReport);
     displaySeqCodonFrequency(codonCounts);
     displaySeqAminoAcids(codonCounts);
     displaySeqTopCodons(codonCounts, totalCodons);
 }
 
-async function displaySeqStats(length, totalCodons, gcContent, atContent, sequence) {
+async function displaySeqStats(length, totalCodons, gcContent, atContent, sequence, createReport = true) {
     const statsGrid = document.getElementById('seqStatsGrid');
     statsGrid.innerHTML = `
         <div class="stat-box">
@@ -439,14 +471,30 @@ async function displaySeqStats(length, totalCodons, gcContent, atContent, sequen
         </div>
     `;
 
-    await db.addReport({
-        sequenceLength: length,
-        totalCodons,
-        gcContent,
-        atContent,
-        sequence,
-        createdBy: 'Admin'
-    });
+    // Only create a new report if createReport is true
+    if (createReport && window.db) {
+        try {
+            await window.db.addReport({
+                sequenceLength: length,
+                totalCodons,
+                gcContent,
+                atContent,
+                sequence,
+                createdBy: currentUser?.username || 'Admin'
+            });
+            // Notify other pages (dashboard/reports) that a new report was added
+            try {
+                window.dispatchEvent(new CustomEvent('reportAdded'));
+            } catch (e) { }
+
+            // Proactively refresh dashboard statistics if available
+            if (typeof loadDashboardData === 'function') {
+                try { loadDashboardData(); } catch (e) { }
+            }
+        } catch (error) {
+            console.error('Error saving report:', error);
+        }
+    }
 }
 
 function displaySeqCodonFrequency(codonCounts) {

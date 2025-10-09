@@ -253,8 +253,13 @@ async function addUser() {
         return;
     }
 
-    if (password.length < 6) {
-        showError('Password must be at least 6 characters long.');
+    if (username.length < 4) {
+        showError('Username must be at least 4 characters long.');
+        return;
+    }
+
+    if (password.length < 4) {
+        showError('Password must be at least 4 characters long.');
         return;
     }
 
@@ -272,13 +277,10 @@ async function addUser() {
         await initializeDatabase();
         console.log('Database initialized, db object:', db);
 
-        // Hash password (simple hash for demo - in production use proper hashing)
-        const hashedPassword = hashPassword(password);
-
         const userData = {
             username,
             email,
-            password: hashedPassword,
+            password, // Server will hash the password
             role,
             description
         };

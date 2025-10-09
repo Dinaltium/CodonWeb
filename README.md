@@ -36,10 +36,12 @@ A comprehensive web-based platform for codon analysis, DNA sequence processing, 
    ```bash
    npm run create-admin
    ```
-   This creates a default admin user:
+   This creates/resets the default admin user:
    - Username: `admin`
    - Password: `admin123`
    - Email: `admin@codoncraft.com`
+   
+   **Emergency Access**: If you can't login, run this command to reset the admin password.
 
 5. **Start the Server**:
    ```bash

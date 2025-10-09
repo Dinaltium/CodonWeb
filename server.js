@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
+const bcrypt = require('bcryptjs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -68,6 +69,19 @@ app.post('/api/users', async (req, res) => {
     try {
         const { username, email, password, role } = req.body;
 
+        // Validation
+        if (!username || !email || !password) {
+            return res.status(400).json({ error: 'All fields are required' });
+        }
+
+        if (username.length < 4) {
+            return res.status(400).json({ error: 'Username must be at least 4 characters long' });
+        }
+
+        if (password.length < 4) {
+            return res.status(400).json({ error: 'Password must be at least 4 characters long' });
+        }
+
         // Check if user already exists
         const existingUser = await User.findOne({
             $or: [{ username }, { email }]
@@ -80,11 +94,15 @@ app.post('/api/users', async (req, res) => {
             });
         }
 
+        // Hash password
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+
         // Create new user
         const user = new User({
             username,
             email,
-            password, // In production, hash this password
+            password: hashedPassword,
             role: role || 'User'
         });
 
@@ -103,15 +121,28 @@ app.post('/api/auth/login', async (req, res) => {
     try {
         const { username, password } = req.body;
 
+        // Validation
+        if (!username || !password) {
+            return res.status(400).json({ error: 'Username and password are required' });
+        }
+
+        if (username.length < 4) {
+            return res.status(400).json({ error: 'Username must be at least 4 characters long' });
+        }
+
+        if (password.length < 4) {
+            return res.status(400).json({ error: 'Password must be at least 4 characters long' });
+        }
+
         // Find user by username
         const user = await User.findOne({ username });
         if (!user) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
-        // In production, use proper password hashing (bcrypt)
-        // For now, using simple hash comparison
-        if (user.password !== password) {
+        // Verify password using bcrypt
+        const isValidPassword = await bcrypt.compare(password, user.password);
+        if (!isValidPassword) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
@@ -162,6 +193,15 @@ app.get('/api/reports/:id', async (req, res) => {
             return res.status(404).json({ error: 'Report not found' });
         }
         res.json(report);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.delete('/api/reports/:id', async (req, res) => {
+    try {
+        const result = await Report.findByIdAndDelete(req.params.id);
+        res.json({ success: !!result });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

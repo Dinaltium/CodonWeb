@@ -1,4 +1,4 @@
-const CODON_TABLE = {
+window.CODON_TABLE = {
     'TTT': 'Phe', 'TTC': 'Phe', 'TTA': 'Leu', 'TTG': 'Leu',
     'TCT': 'Ser', 'TCC': 'Ser', 'TCA': 'Ser', 'TCG': 'Ser',
     'TAT': 'Tyr', 'TAC': 'Tyr', 'TAA': 'STOP', 'TAG': 'STOP',
@@ -46,33 +46,39 @@ function initSequencePage() {
             }
             
             .seq-card h2 {
-                color: #333;
-                margin-bottom: 15px;
+                color: #1f2937;
+                margin-bottom: 20px;
                 font-size: 1.5em;
-                border-bottom: 2px solid #667eea;
-                padding-bottom: 8px;
+                font-weight: 600;
+                border-bottom: 1px solid #e5e7eb;
+                padding-bottom: 12px;
             }
             
             .seq-card h3 {
-                color: #555;
-                margin: 20px 0 10px;
+                color: #374151;
+                margin: 24px 0 12px;
                 font-size: 1.2em;
+                font-weight: 600;
             }
             
             textarea {
                 width: 100%;
                 min-height: 150px;
-                padding: 12px;
-                border: 2px solid #e0e0e0;
-                border-radius: 8px;
+                padding: 16px;
+                border: 1px solid #d1d5db;
+                border-radius: 6px;
                 font-family: 'Courier New', monospace;
                 font-size: 14px;
                 resize: vertical;
+                background: #fafafa;
+                transition: all 0.2s ease;
             }
             
             textarea:focus {
                 outline: none;
-                border-color: #667eea;
+                border-color: #2563eb;
+                background: white;
+                box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
             }
             
             .button-group {
@@ -80,27 +86,177 @@ function initSequencePage() {
                 gap: 10px;
                 margin-top: 15px;
                 flex-wrap: wrap;
+                position: relative;
+            }
+            
+            .dropdown-container {
+                position: relative;
+                display: inline-block;
+            }
+            
+            .dropdown-btn {
+                background: #f8f9fa;
+                color: #374151;
+                border: 1px solid #d1d5db;
+                padding: 12px 20px;
+                border-radius: 6px;
+                font-size: 14px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            
+            .dropdown-btn:hover {
+                background: #e9ecef;
+                border-color: #9ca3af;
+                color: #1f2937;
+            }
+            
+            .dropdown-arrow {
+                transition: transform 0.3s ease;
+            }
+            
+            .dropdown-arrow.open {
+                transform: rotate(180deg);
+            }
+            
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: white;
+                min-width: 280px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                border: 1px solid #e2e8f0;
+                z-index: 1000;
+                margin-top: 8px;
+                overflow: hidden;
+            }
+            
+            .dropdown-content.show {
+                display: block;
+                animation: dropdownFadeIn 0.2s ease-out;
+            }
+            
+            @keyframes dropdownFadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .dropdown-header {
+                padding: 16px 20px 12px;
+                border-bottom: 1px solid #e5e7eb;
+                background: #f9fafb;
+            }
+            
+            .dropdown-title {
+                font-size: 14px;
+                font-weight: 600;
+                color: #374151;
+                margin: 0;
+            }
+            
+            .dropdown-subtitle {
+                font-size: 12px;
+                color: #6b7280;
+                margin: 4px 0 0;
+            }
+            
+            .dropdown-item {
+                padding: 12px 20px;
+                cursor: pointer;
+                transition: background-color 0.2s;
+                border-bottom: 1px solid #f5f5f5;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            
+            .dropdown-item:last-child {
+                border-bottom: none;
+            }
+            
+            .dropdown-item:hover {
+                background: #f8f9fa;
+            }
+            
+            .dropdown-item-icon {
+                width: 32px;
+                height: 32px;
+                border-radius: 6px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+                font-weight: 600;
+                color: white;
+                flex-shrink: 0;
+            }
+            
+            .dropdown-item-content {
+                flex: 1;
+            }
+            
+            .dropdown-item-title {
+                font-size: 14px;
+                font-weight: 500;
+                color: #374151;
+                margin: 0 0 2px;
+            }
+            
+            .dropdown-item-desc {
+                font-size: 12px;
+                color: #6b7280;
+                margin: 0;
+            }
+            
+            .dropdown-item-ratio {
+                font-size: 11px;
+                color: #9ca3af;
+                font-family: 'Courier New', monospace;
+                background: #f1f5f9;
+                padding: 2px 6px;
+                border-radius: 4px;
             }
             
             .seq-btn {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: #2563eb;
                 color: white;
                 border: none;
-                padding: 12px 30px;
-                border-radius: 8px;
-                font-size: 16px;
-                font-weight: 600;
+                padding: 12px 24px;
+                border-radius: 6px;
+                font-size: 14px;
+                font-weight: 500;
                 cursor: pointer;
-                transition: transform 0.2s, box-shadow 0.2s;
+                transition: all 0.2s ease;
             }
             
             .seq-btn:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+                background: #1d4ed8;
+                transform: translateY(-1px);
+                box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
             }
             
             .seq-btn.secondary {
-                background: linear-gradient(135deg, #868f96 0%, #596164 100%);
+                background: #6b7280;
+                color: white;
+            }
+            
+            .seq-btn.secondary:hover {
+                background: #4b5563;
+                transform: translateY(-1px);
+                box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
             }
             
             .loading {
@@ -144,7 +300,8 @@ function initSequencePage() {
             }
             
             .stat-box {
-                background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+                background: #f8fafc;
+                border: 1px solid #e2e8f0;
                 padding: 20px;
                 border-radius: 8px;
                 text-align: center;
@@ -272,7 +429,7 @@ function initSequencePage() {
             
             .bar-fill {
                 height: 100%;
-                background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+                background: #2563eb;
                 border-radius: 4px;
                 transition: width 0.5s ease;
                 display: flex;
@@ -312,11 +469,80 @@ function initSequencePage() {
             </div>
             
             <div class="seq-card">
-                <label for="seqInput">Enter DNA Sequence (ATCG only):</label>
+                <label for="seqInput">Enter DNA Sequence (ATCGN allowed):</label>
                 <textarea id="seqInput" placeholder="Paste your DNA sequence here..."></textarea>
                 <div class="button-group">
                     <button class="seq-btn" onclick="analyzeSeq()">Analyze Sequence</button>
-                    <button class="seq-btn secondary" onclick="loadSeqExample()">Load Example</button>
+                    <div class="dropdown-container">
+                        <button class="dropdown-btn" onclick="toggleSequenceDropdown()">
+                            Load Example
+                            <svg class="dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6,9 12,15 18,9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="dropdown-content" id="sequenceDropdown">
+                            <div class="dropdown-header">
+                                <h4 class="dropdown-title">Sequence Generator</h4>
+                                <p class="dropdown-subtitle">Choose a sequence type to generate</p>
+                            </div>
+                            <div class="dropdown-item" onclick="generateSequence('balanced')">
+                                <div class="dropdown-item-icon" style="background: #10b981;">B</div>
+                                <div class="dropdown-item-content">
+                                    <div class="dropdown-item-title">Balanced</div>
+                                    <div class="dropdown-item-desc">Equal distribution of all bases</div>
+                                </div>
+                                <div class="dropdown-item-ratio">25:25:25:25</div>
+                            </div>
+                            <div class="dropdown-item" onclick="generateSequence('at-rich')">
+                                <div class="dropdown-item-icon" style="background: #f59e0b;">A</div>
+                                <div class="dropdown-item-content">
+                                    <div class="dropdown-item-title">AT-rich</div>
+                                    <div class="dropdown-item-desc">High adenine and thymine content</div>
+                                </div>
+                                <div class="dropdown-item-ratio">40:30:15:15</div>
+                            </div>
+                            <div class="dropdown-item" onclick="generateSequence('gc-rich')">
+                                <div class="dropdown-item-icon" style="background: #3b82f6;">G</div>
+                                <div class="dropdown-item-content">
+                                    <div class="dropdown-item-title">GC-rich</div>
+                                    <div class="dropdown-item-desc">High guanine and cytosine content</div>
+                                </div>
+                                <div class="dropdown-item-ratio">15:15:35:35</div>
+                            </div>
+                            <div class="dropdown-item" onclick="generateSequence('biased')">
+                                <div class="dropdown-item-icon" style="background: #8b5cf6;">B</div>
+                                <div class="dropdown-item-content">
+                                    <div class="dropdown-item-title">Biased</div>
+                                    <div class="dropdown-item-desc">Heavily skewed base composition</div>
+                                </div>
+                                <div class="dropdown-item-ratio">50:20:20:10</div>
+                            </div>
+                            <div class="dropdown-item" onclick="generateSequence('low-quality')">
+                                <div class="dropdown-item-icon" style="background: #ef4444;">L</div>
+                                <div class="dropdown-item-content">
+                                    <div class="dropdown-item-title">Low-quality</div>
+                                    <div class="dropdown-item-desc">Includes ambiguous bases (N)</div>
+                                </div>
+                                <div class="dropdown-item-ratio">40:30:20:10:5</div>
+                            </div>
+                            <div class="dropdown-item" onclick="generateSequence('random')">
+                                <div class="dropdown-item-icon" style="background: #6b7280;">R</div>
+                                <div class="dropdown-item-content">
+                                    <div class="dropdown-item-title">Random</div>
+                                    <div class="dropdown-item-desc">Randomly generated sequence</div>
+                                </div>
+                                <div class="dropdown-item-ratio">25:25:25:25</div>
+                            </div>
+                            <div class="dropdown-item" onclick="generateSequence('repetitive')">
+                                <div class="dropdown-item-icon" style="background: #f97316;">R</div>
+                                <div class="dropdown-item-content">
+                                    <div class="dropdown-item-title">Repetitive</div>
+                                    <div class="dropdown-item-desc">Motif-based repetitive sequence</div>
+                                </div>
+                                <div class="dropdown-item-ratio">AT/GC</div>
+                            </div>
+                        </div>
+                    </div>
                     <button class="seq-btn secondary" onclick="clearSeq()">Clear</button>
                 </div>
             </div>
@@ -386,8 +612,8 @@ function validateSeq(sequence) {
         return { valid: false, error: 'Please enter a DNA sequence.' };
     }
 
-    if (!/^[ATCG]+$/.test(cleanSeq)) {
-        return { valid: false, error: 'Invalid characters detected. Only A, T, C, and G are allowed.' };
+    if (!/^[ATCGN]+$/.test(cleanSeq)) {
+        return { valid: false, error: 'Invalid characters detected. Only A, T, C, G, and N are allowed.' };
     }
 
     if (cleanSeq.length < 3) {
@@ -425,14 +651,18 @@ function analyzeSeq(createReport = true) {
 
 function performSeqAnalysis(sequence, createReport = true) {
     const codonCounts = {};
-    for (let codon in CODON_TABLE) {
+    for (let codon in window.CODON_TABLE) {
         codonCounts[codon] = 0;
     }
 
     let totalCodons = 0;
+    let ambiguousCodons = 0;
+
     for (let i = 0; i <= sequence.length - 3; i += 3) {
         const codon = sequence.substr(i, 3);
-        if (CODON_TABLE[codon]) {
+        if (codon.includes('N')) {
+            ambiguousCodons++;
+        } else if (window.CODON_TABLE[codon]) {
             codonCounts[codon]++;
             totalCodons++;
         }
@@ -444,15 +674,19 @@ function performSeqAnalysis(sequence, createReport = true) {
     const atCount = (sequence.match(/[AT]/g) || []).length;
     const atContent = ((atCount / sequence.length) * 100).toFixed(2);
 
-    displaySeqStats(sequence.length, totalCodons, gcContent, atContent, sequence, createReport);
+    const nCount = (sequence.match(/N/g) || []).length;
+    const nContent = ((nCount / sequence.length) * 100).toFixed(2);
+
+    displaySeqStats(sequence.length, totalCodons, gcContent, atContent, sequence, createReport, ambiguousCodons, nContent);
     displaySeqCodonFrequency(codonCounts);
     displaySeqAminoAcids(codonCounts);
     displaySeqTopCodons(codonCounts, totalCodons);
 }
 
-async function displaySeqStats(length, totalCodons, gcContent, atContent, sequence, createReport = true) {
+async function displaySeqStats(length, totalCodons, gcContent, atContent, sequence, createReport = true, ambiguousCodons = 0, nContent = 0) {
     const statsGrid = document.getElementById('seqStatsGrid');
-    statsGrid.innerHTML = `
+
+    let statsHTML = `
         <div class="stat-box">
             <div class="stat-value">${length}</div>
             <div class="stat-label">Nucleotides</div>
@@ -470,6 +704,22 @@ async function displaySeqStats(length, totalCodons, gcContent, atContent, sequen
             <div class="stat-label">AT Content</div>
         </div>
     `;
+
+    // Add ambiguous codons and N content if present
+    if (ambiguousCodons > 0 || nContent > 0) {
+        statsHTML += `
+            <div class="stat-box">
+                <div class="stat-value">${ambiguousCodons}</div>
+                <div class="stat-label">Ambiguous Codons</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">${nContent}%</div>
+                <div class="stat-label">N Content</div>
+            </div>
+        `;
+    }
+
+    statsGrid.innerHTML = statsHTML;
 
     // Only create a new report if createReport is true
     if (createReport && window.db) {
@@ -501,9 +751,9 @@ function displaySeqCodonFrequency(codonCounts) {
     const container = document.getElementById('seqCodonFreq');
     let html = '<div class="codon-grid">';
 
-    for (let codon in CODON_TABLE) {
+    for (let codon in window.CODON_TABLE) {
         const count = codonCounts[codon];
-        const aa = CODON_TABLE[codon];
+        const aa = window.CODON_TABLE[codon];
         html += `
             <div class="codon-box">
                 <div class="codon-name">${codon}</div>
@@ -520,8 +770,8 @@ function displaySeqCodonFrequency(codonCounts) {
 function displaySeqAminoAcids(codonCounts) {
     const aaGroups = {};
 
-    for (let codon in CODON_TABLE) {
-        const aa = CODON_TABLE[codon];
+    for (let codon in window.CODON_TABLE) {
+        const aa = window.CODON_TABLE[codon];
         if (!aaGroups[aa]) {
             aaGroups[aa] = [];
         }
@@ -564,7 +814,7 @@ function displaySeqAminoAcids(codonCounts) {
 
 function displaySeqTopCodons(codonCounts, totalCodons) {
     const codonArray = Object.entries(codonCounts)
-        .map(([codon, count]) => ({ codon, count, aa: CODON_TABLE[codon] }))
+        .map(([codon, count]) => ({ codon, count, aa: window.CODON_TABLE[codon] }))
         .filter(item => item.count > 0)
         .sort((a, b) => b.count - a.count)
         .slice(0, 20);
@@ -607,4 +857,153 @@ function clearSeq() {
     document.getElementById('seqResults').classList.remove('active');
     const existingError = document.querySelector('.error-message');
     if (existingError) existingError.remove();
+}
+
+// Dropdown functionality
+function toggleSequenceDropdown() {
+    const dropdown = document.getElementById('sequenceDropdown');
+    const arrow = document.querySelector('.dropdown-arrow');
+
+    if (dropdown.classList.contains('show')) {
+        dropdown.classList.remove('show');
+        arrow.classList.remove('open');
+    } else {
+        dropdown.classList.add('show');
+        arrow.classList.add('open');
+    }
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function (event) {
+    const dropdown = document.getElementById('sequenceDropdown');
+    const dropdownContainer = document.querySelector('.dropdown-container');
+
+    if (dropdown && !dropdownContainer.contains(event.target)) {
+        dropdown.classList.remove('show');
+        const arrow = document.querySelector('.dropdown-arrow');
+        if (arrow) arrow.classList.remove('open');
+    }
+});
+
+// Sequence generation functions
+function generateSequence(type) {
+    const length = 300; // Default sequence length
+    let sequence = '';
+
+    switch (type) {
+        case 'balanced':
+            sequence = generateBalancedSequence(length);
+            break;
+        case 'at-rich':
+            sequence = generateATRichSequence(length);
+            break;
+        case 'gc-rich':
+            sequence = generateGCRichSequence(length);
+            break;
+        case 'biased':
+            sequence = generateBiasedSequence(length);
+            break;
+        case 'low-quality':
+            sequence = generateLowQualitySequence(length);
+            break;
+        case 'random':
+            sequence = generateRandomSequence(length);
+            break;
+        case 'repetitive':
+            sequence = generateRepetitiveSequence(length);
+            break;
+        default:
+            sequence = generateBalancedSequence(length);
+    }
+
+    document.getElementById('seqInput').value = sequence;
+
+    // Close dropdown
+    const dropdown = document.getElementById('sequenceDropdown');
+    const arrow = document.querySelector('.dropdown-arrow');
+    dropdown.classList.remove('show');
+    arrow.classList.remove('open');
+
+    // Clear any existing results
+    document.getElementById('seqResults').classList.remove('active');
+    const existingError = document.querySelector('.error-message');
+    if (existingError) existingError.remove();
+}
+
+function generateBalancedSequence(length) {
+    const bases = ['A', 'T', 'C', 'G'];
+    let sequence = '';
+
+    for (let i = 0; i < length; i++) {
+        sequence += bases[Math.floor(Math.random() * 4)];
+    }
+
+    return sequence;
+}
+
+function generateATRichSequence(length) {
+    const bases = ['A', 'A', 'A', 'A', 'T', 'T', 'T', 'C', 'C', 'G', 'G'];
+    let sequence = '';
+
+    for (let i = 0; i < length; i++) {
+        sequence += bases[Math.floor(Math.random() * bases.length)];
+    }
+
+    return sequence;
+}
+
+function generateGCRichSequence(length) {
+    const bases = ['G', 'G', 'G', 'G', 'C', 'C', 'C', 'A', 'T'];
+    let sequence = '';
+
+    for (let i = 0; i < length; i++) {
+        sequence += bases[Math.floor(Math.random() * bases.length)];
+    }
+
+    return sequence;
+}
+
+function generateBiasedSequence(length) {
+    const bases = ['A', 'A', 'A', 'A', 'A', 'T', 'T', 'C', 'C', 'G'];
+    let sequence = '';
+
+    for (let i = 0; i < length; i++) {
+        sequence += bases[Math.floor(Math.random() * bases.length)];
+    }
+
+    return sequence;
+}
+
+function generateLowQualitySequence(length) {
+    const bases = ['A', 'A', 'A', 'A', 'T', 'T', 'T', 'C', 'C', 'G', 'N'];
+    let sequence = '';
+
+    for (let i = 0; i < length; i++) {
+        sequence += bases[Math.floor(Math.random() * bases.length)];
+    }
+
+    return sequence;
+}
+
+function generateRandomSequence(length) {
+    const bases = ['A', 'T', 'C', 'G'];
+    let sequence = '';
+
+    for (let i = 0; i < length; i++) {
+        sequence += bases[Math.floor(Math.random() * 4)];
+    }
+
+    return sequence;
+}
+
+function generateRepetitiveSequence(length) {
+    const motifs = ['AT', 'GC', 'GCGC', 'ATAT', 'GATC'];
+    const motif = motifs[Math.floor(Math.random() * motifs.length)];
+
+    let sequence = '';
+    while (sequence.length < length) {
+        sequence += motif;
+    }
+
+    return sequence.substring(0, length);
 }

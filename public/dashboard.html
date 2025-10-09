@@ -111,14 +111,22 @@
         <main class="main-content">
             <div id="dashboardPage" class="page active">
                 <div class="page-header">
-                    <h1>Dashboard</h1>
-                    <p class="subtitle">Welcome to your bioinformatics workspace</p>
+                    <div class="header-content">
+                        <div class="header-text">
+                            <h1>Dashboard</h1>
+                            <p class="subtitle">Welcome to your bioinformatics workspace</p>
+                        </div>
+                        <div class="system-status-pill" id="systemStatusPill">
+                            <div class="status-indicator"></div>
+                            <span class="status-text">Online</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="dashboard-grid">
                     <div class="dashboard-card">
                         <div class="card-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <path d="M9 12l2 2 4-4"></path>
                                 <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"></path>
@@ -127,13 +135,13 @@
                         <div class="card-content">
                             <h3>Total Analyses</h3>
                             <div class="card-value" id="totalAnalyses">0</div>
-                            <div class="card-subtitle">DNA sequences analyzed</div>
+                            <div class="card-subtitle">DNA sequences</div>
                         </div>
                     </div>
 
                     <div class="dashboard-card">
                         <div class="card-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <rect x="3" y="3" width="7" height="7"></rect>
                                 <rect x="14" y="3" width="7" height="7"></rect>
@@ -142,38 +150,54 @@
                             </svg>
                         </div>
                         <div class="card-content">
-                            <h3>Codons Processed</h3>
+                            <h3>Codons</h3>
                             <div class="card-value" id="totalCodons">0</div>
-                            <div class="card-subtitle">Total codons analyzed</div>
+                            <div class="card-subtitle">Total processed</div>
                         </div>
                     </div>
 
                     <div class="dashboard-card">
                         <div class="card-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <path d="M9 12l2 2 4-4"></path>
                                 <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"></path>
                             </svg>
                         </div>
                         <div class="card-content">
-                            <h3>GC Content</h3>
+                            <h3>Base Content</h3>
                             <div class="card-value" id="avgGcContent">0%</div>
-                            <div class="card-subtitle">Average GC content</div>
+                            <div class="card-subtitle" id="baseContentSubtitle">GC / AT content</div>
                         </div>
                     </div>
 
                     <div class="dashboard-card">
                         <div class="card-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
-                                <polygon points="13,2 3,14 12,14 11,22 21,10 12,10"></polygon>
+                                <path d="M3 3v18h18"></path>
+                                <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path>
                             </svg>
                         </div>
                         <div class="card-content">
-                            <h3>System Status</h3>
-                            <div class="card-value status-active">Online</div>
-                            <div class="card-subtitle">Analysis engine ready</div>
+                            <h3>Top Codon</h3>
+                            <div class="card-value" id="mostCommonCodon">-</div>
+                            <div class="card-subtitle">Most frequent</div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M8 12l2 2 4-4"></path>
+                            </svg>
+                        </div>
+                        <div class="card-content">
+                            <h3>Diversity</h3>
+                            <div class="card-value" id="codonDiversity">0</div>
+                            <div class="card-subtitle">Unique codons</div>
                         </div>
                     </div>
                 </div>
@@ -181,7 +205,7 @@
                 <div class="dashboard-section">
                     <h2>Recent Analyses</h2>
                     <div class="recent-analyses" id="recentAnalyses">
-                        <div class="no-data">No recent analyses found. Start by analyzing a DNA sequence!</div>
+                        <div class="no-data">Loading analyses...</div>
                     </div>
                 </div>
 
@@ -201,19 +225,19 @@
                         <div class="codon-stats">
                             <div class="stat-item">
                                 <span class="stat-label">Most Common Codon:</span>
-                                <span class="stat-value" id="mostCommonCodon">-</span>
+                                <span class="stat-value" id="mostCommonCodonStats">Loading...</span>
                             </div>
                             <div class="stat-item">
                                 <span class="stat-label">Codon Diversity:</span>
-                                <span class="stat-value" id="codonDiversity">-</span>
+                                <span class="stat-value" id="codonDiversityStats">Loading...</span>
                             </div>
                             <div class="stat-item">
                                 <span class="stat-label">Stop Codons:</span>
-                                <span class="stat-value" id="stopCodons">-</span>
+                                <span class="stat-value" id="stopCodons">Loading...</span>
                             </div>
                             <div class="stat-item">
                                 <span class="stat-label">Codon Bias Index:</span>
-                                <span class="stat-value" id="codonBiasIndex">-</span>
+                                <span class="stat-value" id="codonBiasIndex">Loading...</span>
                             </div>
                         </div>
                     </div>
@@ -237,19 +261,19 @@
                         <div class="aa-stats">
                             <div class="stat-item">
                                 <span class="stat-label">Most Abundant AA:</span>
-                                <span class="stat-value" id="mostAbundantAA">-</span>
+                                <span class="stat-value" id="mostAbundantAA">Loading...</span>
                             </div>
                             <div class="stat-item">
                                 <span class="stat-label">AA Diversity:</span>
-                                <span class="stat-value" id="aaDiversity">-</span>
+                                <span class="stat-value" id="aaDiversity">Loading...</span>
                             </div>
                             <div class="stat-item">
                                 <span class="stat-label">Hydrophobic AAs:</span>
-                                <span class="stat-value" id="hydrophobicAAs">-</span>
+                                <span class="stat-value" id="hydrophobicAAs">Loading...</span>
                             </div>
                             <div class="stat-item">
                                 <span class="stat-label">Charged AAs:</span>
-                                <span class="stat-value" id="chargedAAs">-</span>
+                                <span class="stat-value" id="chargedAAs">Loading...</span>
                             </div>
                         </div>
                     </div>
@@ -268,7 +292,7 @@
                             <h3>Efficiency Score</h3>
                             <div class="score-display">
                                 <div class="score-circle" id="efficiencyScore">
-                                    <span class="score-value">-</span>
+                                    <span class="score-value">Loading...</span>
                                     <span class="score-label">/100</span>
                                 </div>
                             </div>
@@ -284,11 +308,11 @@
                             <div class="pattern-analysis" id="patternAnalysis">
                                 <div class="pattern-item">
                                     <span class="pattern-label">Rare Codons:</span>
-                                    <span class="pattern-value" id="rareCodons">-</span>
+                                    <span class="pattern-value" id="rareCodons">Loading...</span>
                                 </div>
                                 <div class="pattern-item">
                                     <span class="pattern-label">Preferred Codons:</span>
-                                    <span class="pattern-value" id="preferredCodons">-</span>
+                                    <span class="pattern-value" id="preferredCodons">Loading...</span>
                                 </div>
                             </div>
                         </div>
@@ -311,7 +335,7 @@
                             <span class="legend-label">High Usage</span>
                         </div>
                         <div class="codon-heatmap" id="codonHeatmap">
-                            <!-- Heatmap will be generated here -->
+                            <div class="no-data">Loading heatmap...</div>
                         </div>
                     </div>
                 </div>

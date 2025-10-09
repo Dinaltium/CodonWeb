@@ -178,6 +178,28 @@ class Database {
         }
     }
 
+    async deleteReport(reportId) {
+        if (!this.isConnected) return false;
+        try {
+            if (this.useAPI) {
+                const response = await fetch(`${this.apiBaseUrl}/reports/${reportId}`, {
+                    method: 'DELETE'
+                });
+                const result = await response.json();
+                return result.success;
+            } else {
+                const data = this.getData();
+                const initialLength = data.reports.length;
+                data.reports = data.reports.filter(report => report._id !== reportId);
+                this.saveData(data);
+                return data.reports.length < initialLength;
+            }
+        } catch (error) {
+            console.error('Error deleting report:', error);
+            return false;
+        }
+    }
+
     async disconnect() {
         // No need to disconnect from localStorage
         this.isConnected = false;

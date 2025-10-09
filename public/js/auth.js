@@ -83,6 +83,16 @@ class AuthManager {
             return;
         }
 
+        if (username.length < 4) {
+            this.showError('Username must be at least 4 characters long');
+            return;
+        }
+
+        if (password.length < 4) {
+            this.showError('Password must be at least 4 characters long');
+            return;
+        }
+
         this.setLoading(true, 'loginBtn');
 
         try {
@@ -127,8 +137,13 @@ class AuthManager {
             return;
         }
 
-        if (password.length < 6) {
-            this.showRegisterError('Password must be at least 6 characters');
+        if (username.length < 4) {
+            this.showRegisterError('Username must be at least 4 characters long');
+            return;
+        }
+
+        if (password.length < 4) {
+            this.showRegisterError('Password must be at least 4 characters long');
             return;
         }
 
@@ -155,7 +170,7 @@ class AuthManager {
                 username,
                 email,
                 role,
-                password: this.hashPassword(password) // In real app, hash on server
+                password: password // Server will hash the password
             };
 
             await this.createUser(newUser);
@@ -183,9 +198,13 @@ class AuthManager {
             });
 
             if (response.ok) {
-                return await response.json();
+                const userData = await response.json();
+                return userData;
             } else if (response.status === 401) {
                 return null; // Invalid credentials
+            } else {
+                const errorData = await response.json();
+                return null;
             }
         } catch (error) {
             console.log('API not available, using localStorage');

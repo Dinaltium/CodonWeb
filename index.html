@@ -4,19 +4,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protein-Ligand - Redirecting...</title>
+    <title>CodonCraft - Redirecting...</title>
+    <link rel="stylesheet" href="/css/theme.css">
+    <style>
+        .redirect-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: var(--color-foreground);
+        }
+        .redirect-content {
+            text-align: center;
+            background: var(--color-card);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--color-border);
+        }
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+        .redirect-link {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .redirect-link:hover {
+            color: var(--color-accent);
+        }
+        .spinner {
+            border: 3px solid var(--color-border);
+            border-top: 3px solid var(--color-primary);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
     <script>
-        // Redirect to login page
-        window.location.href = '/login.html';
+        // Redirect to login page with delay for better UX
+        setTimeout(() => {
+            window.location.href = '/login.html';
+        }, 2000);
     </script>
 </head>
 
 <body>
-    <div
-        style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: Arial, sans-serif;">
-        <div style="text-align: center;">
+    <div class="redirect-container">
+        <div class="redirect-content">
+            <div class="logo">🧬 CodonCraft</div>
             <h2>Redirecting to login...</h2>
-            <p>If you are not redirected automatically, <a href="/login.html">click here hehe</a>.</p>
+            <div class="spinner"></div>
+            <p>If you are not redirected automatically, <a href="/login.html" class="redirect-link">click here</a>.</p>
         </div>
     </div>
 </body>

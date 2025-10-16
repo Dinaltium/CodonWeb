@@ -188,11 +188,27 @@ localStorage.setItem('debug', 'true');
 
 ## 🤝 Contributing
 
+We welcome contributions from the community! Here's how you can help:
+
+### How to Contribute
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature-name`
 3. Commit changes: `git commit -am 'Add feature'`
 4. Push to branch: `git push origin feature-name`
 5. Submit a pull request
+
+### Contribution Guidelines
+- Follow the existing code style
+- Add tests for new features
+- Update documentation as needed
+- Ensure all tests pass before submitting
+
+### GitHub Contributors
+Thank you to all our contributors! 🎉
+
+[![Contributors](https://contrib.rocks/image?repo=yourusername/codoncraft)](https://github.com/yourusername/codoncraft/graphs/contributors)
+
+*This project is made possible by the amazing contributions from our community.*
 
 ## 📝 License
 

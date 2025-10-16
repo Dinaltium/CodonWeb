@@ -29,7 +29,7 @@ function checkAuthentication() {
         currentUser = user;
         return true;
     } catch (error) {
-        console.error('Error parsing auth data:', error);
+        console.error('Error parsing auth data :', error);
         window.location.href = '/login.html';
         return false;
     }

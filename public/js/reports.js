@@ -96,7 +96,7 @@ function loadReportsPage() {
             .filter-clear {
                 color: #6b7280;
                 border-color: #d1d5db;
-                background: #f9fafb;
+                background:rgba(249, 250, 251, 0.82);
             }
 
             .filter-clear:hover {

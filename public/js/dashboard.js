@@ -106,7 +106,7 @@ async function loadDashboardData() {
             }
         });
 
-        document.getElementById('totalCodons').textContent = totalCodons;
+        document.getElementById('DNA').textContent = totalCodons;
 
         // Update combined GC/AT content display
         const avgGcContent = reports.length > 0 ? (totalGcContent / reports.length).toFixed(1) : 0;

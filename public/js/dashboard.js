@@ -1,6 +1,19 @@
+/**
+ * CodonCraft Dashboard JavaScript
+ * Main dashboard functionality including authentication, navigation, and data management
+ * 
+ * @author CodonCraft Team
+ * @version 1.0.0
+ */
+
 let currentUser = null;
 
-// Check authentication on page load
+/**
+ * Check user authentication status and redirect to login if invalid
+ * Validates session data from localStorage and checks for 24-hour session expiry
+ * 
+ * @returns {boolean} True if user is authenticated, false otherwise
+ */
 function checkAuthentication() {
     const authData = localStorage.getItem('codoncraft_auth');
     if (!authData) {

@@ -42,7 +42,7 @@ class Database {
                 return true;
             }
         } catch (error) {
-            console.log('⚠️ API not available, using localStorage');
+            console.log('⚠️ API not available, using localStorage (weak mode)');
         }
 
         // Fallback to localStorage

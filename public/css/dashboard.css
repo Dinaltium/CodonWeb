@@ -1,4 +1,13 @@
-/* Professional Minimalistic Design */
+/* 
+ * CodonCraft Dashboard Styles
+ * Professional Minimalistic Design System
+ * 
+ * @author CodonCraft Team
+ * @version 1.0.0
+ * @description Modern, clean CSS for bioinformatics platform
+ */
+
+/* CSS Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;

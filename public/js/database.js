@@ -25,7 +25,7 @@ class Database {
             localStorage.setItem(this.storageKey, JSON.stringify(defaultData));
         }
         this.isConnected = true;
-        console.log('✅ Connected to local storage successfully!');
+        console.log('✅ Connected to local storage successfully! YAY');
         console.log('Database: Local Storage (Demo Mode)');
         console.log('💡 To use MongoDB, start the server: npm start');
     }
